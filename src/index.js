@@ -4,15 +4,20 @@ import ConnectedCounter from './ConnectedCounter';
 import ConnectedBinaryDecision from './ConnectedBinaryDecision';
 import createStore from './createStore';
 import combineReducers from './combineReducers';
+import applyMiddleware from './applyMiddleware';
+import logger from './loggerMiddleware';
 import counterReducer from './counterReducer';
 import binaryDecisionReducer from './binaryDecisionReducer';
 import './index.css';
 
+const storeCreator = applyMiddleware(logger);
 const rootReducer = combineReducers({
   counter: counterReducer,
   binaryDecision: binaryDecisionReducer,
 });
-const { getState, dispatch, subscribe } = createStore(rootReducer);
+
+const store = storeCreator(createStore)(rootReducer);
+const { getState, dispatch, subscribe } = store;
 
 ReactDOM.render(
   <div>
