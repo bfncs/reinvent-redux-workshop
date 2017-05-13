@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
-import reducer from './counterReducer';
+import PropTypes from 'prop-types';
 
 class Counter extends Component {
-  state = reducer(undefined, {});
+  static propTypes = {
+    getState: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    subscribe: PropTypes.func.isRequired,
+  };
 
-  dispatch(action) {
-    this.setState(prevState => reducer(prevState, action));
+  componentDidMount() {
+    this.unsubscribe = this.props.subscribe(() => this.forceUpdate());
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   increment = () => {
-    this.dispatch({ type: 'INCREMENT' });
+    this.props.dispatch({ type: 'INCREMENT' });
   };
 
   decrement = () => {
-    this.dispatch({ type: 'DECREMENT' });
+    this.props.dispatch({ type: 'DECREMENT' });
   };
 
   render() {
+    const { value } = this.props.getState();
     return (
       <div>
-        {this.state.value}
+        {value}
         <button onClick={this.increment}>+</button>
         <button onClick={this.decrement}>-</button>
       </div>

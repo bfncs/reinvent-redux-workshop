@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './Counter';
+import Counter from './Counter';
+import createStore from './createStore';
+import counterReducer from './counterReducer';
 import './index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const { getState, dispatch, subscribe } = createStore(counterReducer);
+
+ReactDOM.render(
+  <Counter getState={getState} dispatch={dispatch} subscribe={subscribe} />,
+  document.getElementById('root')
+);
