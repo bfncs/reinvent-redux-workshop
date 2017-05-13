@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
-
-const reducer = (state = { value: 0 }, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return { value: state.value + 1 };
-    case 'DECREMENT':
-      return { value: state.value - 1 };
-    default:
-      return state;
-  }
-};
+import reducer from './counterReducer';
 
 class Counter extends Component {
   state = reducer(undefined, {});
