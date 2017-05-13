@@ -1,39 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class Counter extends Component {
-  static propTypes = {
-    getState: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    subscribe: PropTypes.func.isRequired,
-  };
+const Counter = ({ value, increment, decrement }) => (
+  <div>
+    {value}
+    <button onClick={increment}>+</button>
+    <button onClick={decrement}>-</button>
+  </div>
+);
 
-  componentDidMount() {
-    this.unsubscribe = this.props.subscribe(() => this.forceUpdate());
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  increment = () => {
-    this.props.dispatch({ type: 'INCREMENT' });
-  };
-
-  decrement = () => {
-    this.props.dispatch({ type: 'DECREMENT' });
-  };
-
-  render() {
-    const { value } = this.props.getState();
-    return (
-      <div>
-        {value}
-        <button onClick={this.increment}>+</button>
-        <button onClick={this.decrement}>-</button>
-      </div>
-    );
-  }
-}
+Counter.propTypes = {
+  value: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+};
 
 export default Counter;
