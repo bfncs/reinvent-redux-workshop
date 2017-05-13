@@ -18,7 +18,7 @@ class ConnectedBinaryDecision extends Component {
   }
 
   increment = () => {
-    this.props.dispatch({ type: 'TOGGLE' });
+    this.props.dispatch({ type: 'TOGGLE', delay: 2000 });
   };
 
   render() {
