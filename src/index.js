@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ConnectedCounter from './ConnectedCounter';
-import ConnectedBinaryDecision from './ConnectedBinaryDecision';
+import connectedCounter from './connectedCounter';
+import connectedBinaryDecision from './connectedBinaryDecision';
 import createStore from './createStore';
 import combineReducers from './combineReducers';
 import applyMiddleware from './applyMiddleware';
@@ -18,20 +18,14 @@ const rootReducer = combineReducers({
 });
 
 const store = storeCreator(createStore)(rootReducer);
-const { getState, dispatch, subscribe } = store;
+
+const ConnectedCounter = connectedCounter(store);
+const ConnectedBinaryDecision = connectedBinaryDecision(store);
 
 ReactDOM.render(
   <div>
-    <ConnectedCounter
-      getState={getState}
-      dispatch={dispatch}
-      subscribe={subscribe}
-    />
-    <ConnectedBinaryDecision
-      getState={getState}
-      dispatch={dispatch}
-      subscribe={subscribe}
-    />
+    <ConnectedCounter />
+    <ConnectedBinaryDecision />
   </div>,
   document.getElementById('root')
 );
