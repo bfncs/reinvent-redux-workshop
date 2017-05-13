@@ -18,12 +18,12 @@ class ConnectedBinaryDecision extends Component {
   }
 
   increment = () => {
-    this.props.dispatch({ type: 'INCREMENT' });
+    this.props.dispatch({ type: 'TOGGLE' });
   };
 
   render() {
-    const { value } = this.props.getState();
-    return <BinaryDecision value={value % 2 === 0} toggle={this.increment} />;
+    const { binaryDecision: { value } } = this.props.getState();
+    return <BinaryDecision value={value} toggle={this.increment} />;
   }
 }
 

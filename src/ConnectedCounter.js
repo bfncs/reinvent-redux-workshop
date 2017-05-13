@@ -26,7 +26,7 @@ class ConnectedCounter extends Component {
   };
 
   render() {
-    const { value } = this.props.getState();
+    const { counter: { value } } = this.props.getState();
     return (
       <Counter
         value={value}

@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import ConnectedCounter from './ConnectedCounter';
 import ConnectedBinaryDecision from './ConnectedBinaryDecision';
 import createStore from './createStore';
+import combineReducers from './combineReducers';
 import counterReducer from './counterReducer';
+import binaryDecisionReducer from './binaryDecisionReducer';
 import './index.css';
 
-const { getState, dispatch, subscribe } = createStore(counterReducer);
+const rootReducer = combineReducers({
+  counter: counterReducer,
+  binaryDecision: binaryDecisionReducer,
+});
+const { getState, dispatch, subscribe } = createStore(rootReducer);
 
 ReactDOM.render(
   <div>
